@@ -1,0 +1,57 @@
+canvas{
+    margin-left: 500px;
+    margin-top: 150px;
+}
+fieldset{
+    margin-top: -610px;
+    margin-left: 200px;
+    width: 20%;
+    position: absolute; 
+    float: left;
+    width: 200px;
+    height: 200px;
+    border-color: white;
+    border-radius: 20px;
+    color: white;
+    font-size: 36px;
+}
+.c{
+    margin-top: -510px;
+    margin-left: 710px;
+    position: absolute; 
+    float: left;
+    background-image: url("botesq.png");
+}
+.d{
+    margin-top: -510px;
+    margin-left: 730px;
+    position: absolute; 
+    float: left;
+    background-image: url("botesq.png");
+}
+.e{
+    margin-top: -510px;
+    margin-left: 750px;
+    position: absolute; 
+    float: left;
+    background-image: url("botesq.png");
+}
+.b{
+    margin-top: -510px;
+    margin-left: 770px;
+    position: absolute; 
+    float: left;
+    background-image: url("botesq.png");
+}
+.pers{
+    height: 20px;
+    width:20px;
+}
+*{
+    background: url('fuundo.png');
+}
+
+.oi{
+    font-size: 35;
+    color: white;
+}

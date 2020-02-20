@@ -1,0 +1,165 @@
+<html>
+<head>
+    <title>Jogo Animado</title>
+    <div class= "oi">FUJA DO FOGO PARA VOÇÊ NÃO DERRETER!</div>
+    <link rel="stylesheet" type="text/css" href="projeto2.css" />
+
+    <script language="JavaScript" type"text/javascript">
+    var xHeroi=200; 
+    var yHeroi=200;
+    var xMonstro=0;
+    var yMonstro=0;
+    var KEY_DOWN = 40; 
+    var KEY_UP = 38; 
+    var KEY_LEFT = 37; 
+    var KEY_RIGHT = 39;
+    var pontos = 0;
+    var xFruta = 300;
+    var yFruta = 300
+    window.onkeydown = function(tecla)
+    {
+        switch (tecla.keyCode)
+        {
+        case KEY_RIGHT:
+        xHeroi = (xHeroi + 10);
+        if(xHeroi > 456)
+        xHeroi = 456; break;
+        case KEY_DOWN:
+        yHeroi=(yHeroi + 10);
+        if(yHeroi > 400)
+        yHeroi = 400; break;
+        case KEY_LEFT:
+        xHeroi=(xHeroi - 10);
+        if(xHeroi < -10)
+        xHeroi = -10; break;
+        case KEY_UP:
+        yHeroi=(yHeroi - 10);
+        if(yHeroi < -10)
+        yHeroi = -10; break;
+        }
+        AtualizaTela();
+    }
+
+
+   setInterval(function()
+    {
+          MovimentoDoMonstro();
+           pontos++;
+           AtualizaTela();
+  }, 100);
+    
+    function applyKey (_event_)
+    { 
+    var winObj = checkEventObj(_event_); 
+    var intKeyDown = winObj.key_down; 
+    var intKEY_UP = winObj.KEY_UP; 
+    var intKEY_LEFT = winObj.KEY_LEFT; 
+    var intKEY_RIGHT = winObj.KEY_RIGHT; 
+    }
+    var objCanvas=null;
+    var objContexto=null;
+    var imgFundo = new Image();
+        imgFundo.src = "fundo.png";
+    var imgHeroi = new Image();
+        imgHeroi.src = "Imagem1.png";
+    var imgMonstro = new Image();
+        imgMonstro.src = "Imagem2.png";  
+    var imgFruta = new Image();
+        imgFruta.src = "fruta.png";
+    
+    function AtualizaTela()
+    {
+        objContexto.drawImage(imgFundo,0,0);
+        objContexto.drawImage(imgHeroi, xHeroi, yHeroi);
+        objContexto.drawImage(imgMonstro, xMonstro, yMonstro);
+        objContexto.drawImage(imgFruta, xFruta, yFruta);
+        if(xMonstro == xHeroi && yHeroi == yMonstro)
+            {
+                alert("Voçê perdeu!");
+                xMonstro = 0;
+                yMonstro = 0;
+                AtualizaTela();
+                document.getElementById("status").innerHTML = pontos + "";
+            }
+        else
+        {
+           if(xMonstro > xHeroi && yMonstro > yHeroi)
+              {
+                xMonstro = xMonstro - 5;
+                yMonstro = yMonstro - 5;
+              }
+
+                 if(xMonstro < xHeroi && yMonstro < yHeroi)
+                 {
+                   xMonstro = xMonstro + 5;
+                   yMonstro = yMonstro + 5;
+                 }
+                   if(xMonstro < xHeroi && yMonstro > yHeroi)
+                   {
+                     xMonstro = xMonstro + 5;
+                     yMonstro = yMonstro - 5;
+                   }
+
+                   if(xMonstro > xHeroi && yMonstro < yHeroi)
+                      { 
+                        xMonstro = xMonstro - 5;
+                        yMonstro = yMonstro + 5;
+                      }
+        
+        }
+        if(xFruta == xHeroi && yFruta == yHeroi)
+        {
+           pontos = pontos + 1;
+           xFruta = Math.round(Math.random()*(w-cw)/cw);
+        }
+
+    }
+    function MovimentoDoMonstro ()
+ {
+   // sorteia uma direção para a qual o monstro vai se dirigir
+   var direcao = parseInt((Math.random()*10) % 4);
+   switch (direcao)
+   {
+   case 0:xMonstro=(xMonstro + 10); break;
+   case 1:yMonstro=(yMonstro + 10); break;
+   case 2:xMonstro=(xMonstro - 10); break;
+   case 3:yMonstro=(yMonstro - 10); break;
+   }
+ }
+
+
+    function Iniciar()
+    {
+        objCanvas = document.getElementById("meuCanvas");
+        objContexto = objCanvas.getContext("2d");
+        objContexto.drawImage(imgFundo,0,0);
+        objContexto.drawImage(imgHeroi,xHeroi,yHeroi);
+        objContexto.drawImage(imgMonstro,xMonstro,yMonstro);
+        objContexto.drawImage(imgFruta, xFruta, yFruta);
+    }
+
+    function MovimentoDaFruta()
+    {
+     if(xFruta == xHeroi && yFruta == yHeroi)
+     {
+       pontos = pontos + 1;
+       xFruta = parseInt((Math.random()*10) % 4);
+     }
+    }
+    </script>
+</head>
+
+<body onLoad ="Iniciar();">
+    <canvas id ="meuCanvas" width="512" height="480"
+    style="border: 1px solid #000000;"></canvas><br>
+
+    <fieldset>
+        <legend>
+            Pontos
+        </legend>
+        <p id="status">
+        </p>
+    </fieldset>
+</body>
+
+</html>
