@@ -45,13 +45,13 @@
         if( xFruta > 456)
           xFruta = 456;
           
-        else if( yFruta > 456)
+        if( yFruta > 456)
           yFruta = 456;
 
-        else if( xFruta < -10)
+        if( xFruta < -10)
           xFruta = -10;
 
-        else if( yFruta < -10)
+        if( yFruta < -10)
           yFruta = -10;
         
         AtualizaTela();
@@ -87,7 +87,7 @@
     
     function AtualizaTela()
     {
-        objContexto.drawImage(imgFundo,1,1);
+        objContexto.drawImage(imgFundo,0,0);
         objContexto.drawImage(imgHeroi, xHeroi, yHeroi);
         objContexto.drawImage(imgMonstro, xMonstro, yMonstro);
         objContexto.drawImage(imgFruta, xFruta, yFruta);
@@ -95,8 +95,8 @@
         if (xFruta == xHeroi && yFruta == yHeroi)
             {
               frutas = frutas + 1;
-              xFruta =  parseInt((Math.random()*10) % 4);
-              yfruta =  parseInt((Math.random()*10) % 4);
+              xFruta =  parseInt((Math.random()*7));
+              yfruta =  parseInt((Math.random()*3));
               AtualizaTela();
             }
 
@@ -107,6 +107,10 @@
                 alert("Voçê perdeu!");
                 xMonstro = 0;
                 yMonstro = 0;
+                xHeroi = 200;
+                yHeroi = 200;
+                xFruta = ((Math.random()*7));
+                yFruta = ((Math.random()*7))
                 AtualizaTela();
                 document.getElementById("status").innerHTML = pontos + "";
             }
