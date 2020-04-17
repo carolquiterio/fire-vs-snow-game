@@ -1,9 +1,9 @@
 canvas{
     margin-left: 500px;
-    margin-top: 150px;
+    margin-top: 80px;
 }
 fieldset{
-    margin-top: -610px;
+    margin-top: -310px;
     margin-left: 200px;
     width: 20%;
     position: absolute; 
@@ -48,7 +48,7 @@ fieldset{
     width:20px;
 }
 *{
-    background: url('fuundo.png');
+    background-color: purple;
 }
 
 .oi{

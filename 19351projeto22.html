@@ -14,10 +14,14 @@
     var KEY_LEFT = 37; 
     var KEY_RIGHT = 39;
     var pontos = 0;
+    var frutas = 0;
     var xFruta = 300;
     var yFruta = 300
     window.onkeydown = function(tecla)
     {
+      
+        pontos = 0;
+        frutas = 0;
         switch (tecla.keyCode)
         {
         case KEY_RIGHT:
@@ -37,6 +41,19 @@
         if(yHeroi < -10)
         yHeroi = -10; break;
         }
+
+        if( xFruta > 456)
+          xFruta = 456;
+          
+        else if( yFruta > 456)
+          yFruta = 456;
+
+        else if( xFruta < -10)
+          xFruta = -10;
+
+        else if( yFruta < -10)
+          yFruta = -10;
+        
         AtualizaTela();
     }
 
@@ -44,6 +61,7 @@
    setInterval(function()
     {
           MovimentoDoMonstro();
+          MovimentoDaFruta();
            pontos++;
            AtualizaTela();
   }, 100);
@@ -69,12 +87,23 @@
     
     function AtualizaTela()
     {
-        objContexto.drawImage(imgFundo,0,0);
+        objContexto.drawImage(imgFundo,1,1);
         objContexto.drawImage(imgHeroi, xHeroi, yHeroi);
         objContexto.drawImage(imgMonstro, xMonstro, yMonstro);
         objContexto.drawImage(imgFruta, xFruta, yFruta);
+        
+        if (xFruta == xHeroi && yFruta == yHeroi)
+            {
+              frutas = frutas + 1;
+              xFruta =  parseInt((Math.random()*10) % 4);
+              yfruta =  parseInt((Math.random()*10) % 4);
+              AtualizaTela();
+            }
+
         if(xMonstro == xHeroi && yHeroi == yMonstro)
             {
+              console.log(xFruta + " " + xHeroi);
+              console.log(yFruta + " " + yHeroi);
                 alert("Voçê perdeu!");
                 xMonstro = 0;
                 yMonstro = 0;
@@ -83,50 +112,56 @@
             }
         else
         {
-           if(xMonstro > xHeroi && yMonstro > yHeroi)
-              {
-                xMonstro = xMonstro - 5;
-                yMonstro = yMonstro - 5;
-              }
+          if(xMonstro > xHeroi && yMonstro > yHeroi)
+            {
+              xMonstro = xMonstro - 5;
+              yMonstro = yMonstro - 5;
+            }
 
-                 if(xMonstro < xHeroi && yMonstro < yHeroi)
-                 {
-                   xMonstro = xMonstro + 5;
-                   yMonstro = yMonstro + 5;
-                 }
-                   if(xMonstro < xHeroi && yMonstro > yHeroi)
-                   {
-                     xMonstro = xMonstro + 5;
-                     yMonstro = yMonstro - 5;
-                   }
+            if(xMonstro < xHeroi && yMonstro < yHeroi)
+            {
+              xMonstro = xMonstro + 5;
+              yMonstro = yMonstro + 5;
+            }
+            if(xMonstro < xHeroi && yMonstro > yHeroi)
+            {
+              xMonstro = xMonstro + 5;
+              yMonstro = yMonstro - 5;
+            }
 
-                   if(xMonstro > xHeroi && yMonstro < yHeroi)
-                      { 
-                        xMonstro = xMonstro - 5;
-                        yMonstro = yMonstro + 5;
-                      }
+            if(xMonstro > xHeroi && yMonstro < yHeroi)
+            { 
+              xMonstro = xMonstro - 5;
+              yMonstro = yMonstro + 5;
+            }
         
-        }
-        if(xFruta == xHeroi && yFruta == yHeroi)
-        {
-           pontos = pontos + 1;
-           xFruta = Math.round(Math.random()*(w-cw)/cw);
         }
 
     }
-    function MovimentoDoMonstro ()
- {
+  function MovimentoDoMonstro ()
+  {
    // sorteia uma direção para a qual o monstro vai se dirigir
-   var direcao = parseInt((Math.random()*10) % 4);
-   switch (direcao)
-   {
-   case 0:xMonstro=(xMonstro + 10); break;
-   case 1:yMonstro=(yMonstro + 10); break;
-   case 2:xMonstro=(xMonstro - 10); break;
-   case 3:yMonstro=(yMonstro - 10); break;
-   }
- }
+    var direcao = parseInt((Math.random()*10) % 4);
+    switch (direcao)
+    {
+        case 0:xMonstro=(xMonstro + 10); break;
+        case 1:yMonstro=(yMonstro + 10); break;
+        case 2:xMonstro=(xMonstro - 10); break;
+        case 3:yMonstro=(yMonstro - 10); break;
+    }
+  }
 
+  function MovimentoDaFruta()
+    {
+     var direcao = parseInt((Math.random()*10) % 4);
+    switch (direcao)
+    {
+        case 0:xFruta=(xFruta + 10); break;
+        case 1:yFruta=(yFruta + 10); break;
+        case 2:xFruta=(xFruta - 10); break;
+        case 3:yFruta=(yFruta - 10); break;
+    }
+    }
 
     function Iniciar()
     {
@@ -138,14 +173,6 @@
         objContexto.drawImage(imgFruta, xFruta, yFruta);
     }
 
-    function MovimentoDaFruta()
-    {
-     if(xFruta == xHeroi && yFruta == yHeroi)
-     {
-       pontos = pontos + 1;
-       xFruta = parseInt((Math.random()*10) % 4);
-     }
-    }
     </script>
 </head>
 
